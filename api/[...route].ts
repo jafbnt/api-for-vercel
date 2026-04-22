@@ -3,7 +3,7 @@ import type { IncomingMessage, ServerResponse } from 'node:http';
 import { buildApp } from '../src/app.js';
 
 let app: ReturnType<typeof buildApp> | null = null;
-let appReadyPromise: Promise<unknown> | null = null;
+let appReadyPromise: ReturnType<ReturnType<typeof buildApp>['ready']> | null = null;
 
 export default async function handler(req: IncomingMessage, res: ServerResponse) {
   try {
