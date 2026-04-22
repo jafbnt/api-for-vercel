@@ -1,0 +1,52 @@
+@baseUrl = http://localhost:3333/api
+@token = COLE_SEU_JWT_AQUI
+@userId = 1
+
+### Health
+GET {{baseUrl}}/health HTTP/1.1
+content-type: application/json
+
+### Criar usuário
+POST {{baseUrl}}/users HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Neto",
+  "email": "neto@example.com",
+  "password": "12345678"
+}
+
+### Login
+POST {{baseUrl}}/login HTTP/1.1
+content-type: application/json
+
+{
+  "email": "neto@example.com",
+  "password": "12345678"
+}
+
+### Listar usuários
+GET {{baseUrl}}/users HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+
+### Buscar usuário por ID
+GET {{baseUrl}}/users/{{userId}} HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+
+### Atualizar usuário
+PUT {{baseUrl}}/users/{{userId}} HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Neto Atualizado",
+  "email": "neto.atualizado@example.com",
+  "password": "novaSenha123"
+}
+
+### Deletar usuário
+DELETE {{baseUrl}}/users/{{userId}} HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
