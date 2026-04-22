@@ -58,6 +58,10 @@ export function buildApp() {
     app.register(fastifyJwt, {
         secret: env.JWT_SECRET,
     });
+    app.get('/', async () => ({
+        message: 'Welcome to API',
+        docsHint: 'Use /api/health, /api/users and /api/login',
+    }));
     app.get('/api/health', async () => ({ ok: true }));
     app.post('/api/login', {
         schema: {

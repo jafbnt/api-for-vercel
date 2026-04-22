@@ -76,6 +76,11 @@ export function buildApp() {
     secret: env.JWT_SECRET,
   });
 
+  app.get('/', async () => ({
+    message: 'Welcome to API',
+    docsHint: 'Use /api/health, /api/users and /api/login',
+  }));
+
   app.get('/api/health', async () => ({ ok: true }));
 
   app.post(
