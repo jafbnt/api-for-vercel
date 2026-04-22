@@ -9,4 +9,22 @@ const envSchema = z.object({
   PORT: z.coerce.number().int().positive().default(3333),
 });
 
-export const env = envSchema.parse(process.env);
+export type Env = z.infer<typeof envSchema>;
+
+let cachedEnv: Env | null = null;
+
+export function getEnv(): Env {
+  if (cachedEnv) {
+    return cachedEnv;
+  }
+
+  const parsed = envSchema.safeParse(process.env);
+
+  if (!parsed.success) {
+    const fields = parsed.error.issues.map((issue) => issue.path.join('.') || 'env').join(', ');
+    throw new Error(`Invalid environment variables: ${fields}`);
+  }
+
+  cachedEnv = parsed.data;
+  return cachedEnv;
+}

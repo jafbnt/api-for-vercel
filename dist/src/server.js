@@ -1,6 +1,7 @@
 import { buildApp } from './app.js';
-import { env } from './env.js';
+import { getEnv } from './env.js';
 const app = buildApp();
+const env = getEnv();
 app
     .listen({ port: env.PORT, host: '0.0.0.0' })
     .then(() => {

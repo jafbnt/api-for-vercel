@@ -9,9 +9,9 @@ import {
 } from 'fastify-type-provider-zod';
 import { z } from 'zod';
 
-import { db } from './db/client.js';
+import { getDb } from './db/client.js';
 import { usersTable } from './db/schema.js';
-import { env } from './env.js';
+import { getEnv } from './env.js';
 
 const publicUserSchema = z.object({
   id: z.number().int().positive(),
@@ -62,6 +62,9 @@ function isUniqueViolation(error: unknown) {
 }
 
 export function buildApp() {
+  const env = getEnv();
+  const db = getDb();
+
   const app = Fastify({
     logger: true,
   }).withTypeProvider<ZodTypeProvider>();
