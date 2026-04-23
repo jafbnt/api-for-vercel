@@ -81,6 +81,11 @@ export function buildApp() {
     docsHint: 'Use /api/health, /api/users and /api/login',
   }));
 
+  app.get('/api/welcome', async () => ({
+    message: 'Welcome to API',
+    docsHint: 'Use /api/health, /api/users and /api/login',
+  }));
+
   app.get('/api/health', async () => ({ ok: true }));
 
   app.post(
